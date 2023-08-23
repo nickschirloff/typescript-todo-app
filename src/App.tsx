@@ -1,11 +1,20 @@
 import React from 'react'
 import { TaskItem } from './components/TaskItem';
+import { TaskManager } from './components/TaskManager'; 
+import ITask from './interfaces/ITask';
 import './App.css'
 
 function App() {
+  let tasks: ITask[];
+
+  const addTask = (): void => {
+
+  }
+
   return (
     <div className='App'>
-      <TaskItem taskName={'task1'} taskDesc='this is a test item' completed={true} daysLeft={1} />
+      <TaskManager />
+      <TaskItem taskName={'task1'} completed={false} daysLeft={1} />
     </div>
   )
 }
