@@ -1,7 +1,6 @@
-export type Task = {
-    taskID: number;
+export type ITask = {
+    taskID: string;
     taskName: string;
     isCompleted: boolean;
-    startDate: Date;
     endDate: Date;
 };
