@@ -1,6 +1,6 @@
 import React from 'react'
-import { TaskItem } from './components/TaskItem';
-import { TaskManager } from './components/TaskManager'; 
+import { TaskList } from './components/TaskList';
+import { TaskManager } from './components/TaskManager';
 import './App.css'
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
   return (
     <div className='App'>
       <TaskManager />
-      <TaskItem taskID='test-item' taskName={'task1'} completed={false} endDate={temp} />
+      {/* <TaskList /> */}
     </div>
   )
 }
