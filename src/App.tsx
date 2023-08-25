@@ -1,16 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { TaskList } from './components/TaskList';
 import { TaskManager } from './components/TaskManager';
+import { ITask } from './interfaces/ITask';
 import './App.css'
 
 function App() {
-  let temp = new Date();
-  temp.setDate(temp.getDate());
-
+  let [taskList, setTaskList] = useState<ITask[]>([]);
   return (
     <div className='App'>
-      <TaskManager />
-      {/* <TaskList /> */}
+      <TaskManager taskList={taskList} setTaskList={setTaskList} />
+      {/* <TaskList taskList={taskList} setTaskList={setTaskList}/> */}
     </div>
   )
 }

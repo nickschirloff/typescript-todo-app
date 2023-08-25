@@ -4,10 +4,11 @@ type TaskItemProps = {
     taskID: string,
     taskName: string,
     completed: boolean,
-    endDate: Date
+    endDate: Date,
+    removeTask(removedTaskID: string): void,
 }
 
-export const TaskItem: FC<TaskItemProps> = ({ taskID, taskName, completed, endDate }) => {
+export const TaskItem: FC<TaskItemProps> = ({ taskID, taskName, completed, endDate, removeTask }) => {
     const [isComplete, setIsComplete] = useState<boolean>(completed);
     const handleCompletion = () => {
         setIsComplete(!isComplete);
@@ -29,7 +30,7 @@ export const TaskItem: FC<TaskItemProps> = ({ taskID, taskName, completed, endDa
         <span>{taskName}</span>        
         <input type='checkbox' onChange={handleCompletion} />
         <span className={`deadline-span${(getDaysLeft() <= 1 && !isComplete) ? '-near' : ''}`}>{getDaysLeft()} day(s) remaining</span>
-        <button>X</button>
+        <button onClick={() => {removeTask(taskID)}}>X</button>
       </div>
     );
 } 

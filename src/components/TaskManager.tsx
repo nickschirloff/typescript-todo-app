@@ -1,9 +1,13 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { genTaskID } from '../models/TILib';
 import { ITask } from '../interfaces/ITask';
 
+interface TMProps {
+    taskList: ITask[];
+    setTaskList: Dispatch<SetStateAction<ITask[]>>;
+};
 
-export const TaskManager: FC = () => {
+export const TaskManager: FC<TMProps> = ({taskList, setTaskList}) => {
 
     const [taskID, setTaskID] = useState<string>("");
     const [taskName, setTaskName] = useState<string>("");
@@ -11,11 +15,13 @@ export const TaskManager: FC = () => {
     const [todoList, setTodoList] = useState<ITask[]>([]);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        if(event.target.name === "task") {
-            setTaskName(event.target.value);
-        } else {
-            setDeadline(Number(event.target.value));
-        }
+        useEffect(() => {
+            if(event.target.name === "task") {
+                setTaskName(event.target.value);
+            } else {
+                setDeadline(Number(event.target.value));
+            }
+        })   
     }
 
     const addTask = (): void => {
@@ -23,7 +29,7 @@ export const TaskManager: FC = () => {
         let endDate = new Date();
         endDate.setDate(endDate.getDate() + deadline);
         const newTask = { taskID: taskID, taskName: taskName, isCompleted: false, endDate: endDate};
-        setTodoList([...todoList, newTask]);
+        setTaskList([...taskList, newTask]);
         
         // Clearing values
         setTaskName("");
