@@ -14,15 +14,15 @@ export const TaskManager: FC<TMProps> = ({taskList, setTaskList}) => {
     const [deadline, setDeadline] = useState<number>(0);
     const [todoList, setTodoList] = useState<ITask[]>([]);
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        useEffect(() => {
-            if(event.target.name === "task") {
-                setTaskName(event.target.value);
-            } else {
-                setDeadline(Number(event.target.value));
-            }
-        })   
-    }
+    // const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    //     useEffect(() => {
+    //         if(event.target.name === "task") {
+    //             setTaskName(event.target.value);
+    //         } else {
+    //             setDeadline(Number(event.target.value));
+    //         }
+    //     })   
+    // }
 
     const addTask = (): void => {
         setTaskID(genTaskID());
@@ -46,7 +46,7 @@ export const TaskManager: FC<TMProps> = ({taskList, setTaskList}) => {
     return (
       <div>
         <input type='text' placeholder='Task Name' />
-        <input type='number' placeholder='Days to complete' min={0} name='deadline' value={deadline} onChange={handleChange} />
+        <input type='number' placeholder='Days to complete' min={0} name='deadline' value={deadline}  />
         <button onClick={addTask}>Add</button>
       </div>
     );
