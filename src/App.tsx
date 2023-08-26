@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { TaskList } from './components/TaskList';
 import { TaskManager } from './components/TaskManager';
+import { TaskItem } from './components/TaskItem';
+import { isIDUnique } from './models/TILib';
 import { ITask } from './interfaces/ITask';
 import './App.css'
 
 function App() {
   let [taskList, setTaskList] = useState<ITask[]>([]);
-  let [taskID, setTaskID] = useState<number>(0);
+  let [taskID, setTaskID] = useState<string>('0');
 
   const addItem = () => {
-    setTaskID(taskID + 1);
+    console.log(isIDUnique(taskID, taskList));
     setTaskList([...taskList, temp]);
   }
 
@@ -26,7 +28,7 @@ function App() {
   }
 
   const clearLocal = (): void => {
-    setTaskID(0);
+    setTaskID("");
     localStorage.clear();
     setTaskList([]);
     console.log(localStorage.getItem('TASK_ITEM_LIST'));
@@ -56,6 +58,8 @@ function App() {
       <div>
         <button onClick={clearLocal}>Clear</button>
       </div>
+      <TaskManager taskList={taskList} setTaskList={setTaskList} />
+      <TaskList taskList={taskList} setTaskList={setTaskList} />
 
 
 
