@@ -40,7 +40,7 @@ export const TaskManager: FC<TMProps> = ({taskList, setTaskList}) => {
     return(
         <div className='task-manager'>
             <input placeholder='Task Name' type='text' name='task' value={taskName} onChange={handleChange} />
-            <input placeholder='Deadline (in days)' type='number' min={0} name='deadline' onChange={handleChange} />
+            <input placeholder='Deadline (in days)' type='number' min={0} name='deadline' onChange={handleChange} value={deadline} />
             <button onClick={addTask}>Add</button>
         </div>
     );

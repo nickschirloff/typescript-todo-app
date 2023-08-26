@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import { ITask } from '../interfaces/ITask';
+import '../styles/TaskItem.scss';
 
 type TaskItemProps = {
     task: ITask,
@@ -12,7 +13,7 @@ export const TaskItem: FC<TaskItemProps> = ({task, removeTask}) => {
 
     const getDaysLeft = (date: Date):string => {
         const currDate = new Date();
-        let difference = currDate.getTime() - task.endDate.getTime();
+        let difference = Math.ceil((date.getTime() - currDate.getTime()) / (1000 * 3600 * 24));
         if (difference < 0) {
             return `Past due by ${Math.abs(difference)} days!`;
         } else {
@@ -25,17 +26,9 @@ export const TaskItem: FC<TaskItemProps> = ({task, removeTask}) => {
           <div className={`task-item-wrapper${isCompleted? '-completed' : ''}`}>
             <span>{task.taskName}</span>
             <span>{getDaysLeft(task.endDate)}</span>
-            <input type='checkbox' onChange={() => setIsCompleted(true)} />
+            <input type='checkbox' onChange={() => setIsCompleted(!isCompleted)} />
             <button onClick={() => removeTask(task.taskID)}>X</button>
           </div>
         </div>
     )
-} 
-    // return (
-    //   <div className={`task-item${isComplete ? '-completed' : ''}`}>
-    //     <span>{taskName}</span>        
-    //     <input type='checkbox' onChange={handleCompletion} />
-    //     <span className={`deadline-span${(getDaysLeft() <= 1 && !isComplete) ? '-near' : ''}`}>{getDaysLeft()} day(s) remaining</span>
-    //     <button>X</button>
-    //   </div>
-    // );
+}

@@ -60,11 +60,6 @@ function App() {
       </div>
       <TaskManager taskList={taskList} setTaskList={setTaskList} />
       <TaskList taskList={taskList} setTaskList={setTaskList} />
-
-
-
-      {/* <TaskManager taskList={taskList} setTaskList={setTaskList} /> */}
-      {/* <TaskList taskList={taskList} setTaskList={setTaskList}/> */}
     </div>
   )
 }
