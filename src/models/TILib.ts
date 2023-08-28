@@ -16,7 +16,6 @@ export function genTaskID(): string {
     {
         key += characters.charAt(Math.floor(Math.random() * characters.length));
     }
-    console.log("KEY: " + key);
     return key;
 }
 

@@ -1,7 +1,7 @@
-import React, { ChangeEvent, Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { ChangeEvent, Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { genTaskID, isIDUnique } from '../models/TILib';
 import { ITask } from '../interfaces/ITask';
-
+import '../styles/TaskManager.scss';
 
 interface TMProps {
     taskList: ITask[],
@@ -23,7 +23,6 @@ export const TaskManager: FC<TMProps> = ({taskList, setTaskList}) => {
     const addTask = (): void => {
         // Generate unique id for task
         let id = genTaskID();
-        console.log('Name: ' + taskName);
         while(!isIDUnique(id,taskList)) {
             id = genTaskID();
         }
@@ -40,8 +39,8 @@ export const TaskManager: FC<TMProps> = ({taskList, setTaskList}) => {
     return(
         <div className='task-manager'>
             <input placeholder='Task Name' type='text' name='task' value={taskName} onChange={handleChange} />
-            <input placeholder='Deadline (in days)' type='number' min={0} name='deadline' onChange={handleChange} value={deadline} />
-            <button onClick={addTask}>Add</button>
+            <input placeholder='Deadline (in days)' type='number'  name='deadline' onChange={handleChange} value={deadline} />
+            <button onClick={addTask}>Add Task</button>
         </div>
     );
 };

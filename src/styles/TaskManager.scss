@@ -1,0 +1,23 @@
+.task-manager {
+    width: 100px;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.task-manager input {
+    width: 250px;
+    height: 30px;
+    border: 1px solid gray;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.task-manager button {
+    padding: 10px 60px;
+    margin: 5px;
+    white-space: nowrap;
+}

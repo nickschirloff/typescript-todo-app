@@ -1,6 +1,7 @@
 import React, { Dispatch, FC, SetStateAction } from 'react';
 import { ITask } from '../interfaces/ITask';
 import { TaskItem } from './TaskItem';
+import '../styles/TaskList.scss';
 
 type TLProps ={
   taskList: ITask[],
@@ -16,7 +17,7 @@ export const TaskList: FC<TLProps> = ({ taskList, setTaskList }) => {
   }
 
   return(
-    <div>
+    <div className='task-list'>
       {taskList.map(((task: ITask, key:number) => {
         return <TaskItem task={task} removeTask={removeTask} />;
       }))

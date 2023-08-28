@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { ITask } from '../interfaces/ITask';
 import '../styles/TaskItem.scss';
 
@@ -15,7 +15,7 @@ export const TaskItem: FC<TaskItemProps> = ({task, removeTask}) => {
         const currDate = new Date();
         let difference = Math.ceil((date.getTime() - currDate.getTime()) / (1000 * 3600 * 24));
         if (difference < 0) {
-            return `Past due by ${Math.abs(difference)} days!`;
+            return `Past due by ${Math.abs(difference)} day(s)!`;
         } else {
             return `${difference} days remaining.`
         }
@@ -24,8 +24,8 @@ export const TaskItem: FC<TaskItemProps> = ({task, removeTask}) => {
     return (
         <div className='task-item'>
           <div className={`task-item-wrapper${isCompleted? '-completed' : ''}`}>
-            <span>{task.taskName}</span>
-            <span>{getDaysLeft(task.endDate)}</span>
+            <span className='task-span'>{task.taskName}</span>
+            <span className='date-span'>{getDaysLeft(task.endDate)}</span>
             <input type='checkbox' onChange={() => setIsCompleted(!isCompleted)} />
             <button onClick={() => removeTask(task.taskID)}>X</button>
           </div>

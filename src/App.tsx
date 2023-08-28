@@ -1,19 +1,15 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { TaskList } from './components/TaskList';
 import { TaskManager } from './components/TaskManager';
-import { TaskItem } from './components/TaskItem';
-import { isIDUnique } from './models/TILib';
 import { ITask } from './interfaces/ITask';
 import './App.css'
 
+// TODO:
+// - Prevent adding a task with a blank name
+// - Scrollable if tasks overflow screen
+
 function App() {
   let [taskList, setTaskList] = useState<ITask[]>([]);
-  let [taskID, setTaskID] = useState<string>('0');
-
-  const addItem = () => {
-    console.log(isIDUnique(taskID, taskList));
-    setTaskList([...taskList, temp]);
-  }
 
   const saveToLocal = (tasks: ITask[]): void => {
     if(tasks.length != 0) {
@@ -24,39 +20,27 @@ function App() {
 
   const readFromLocal = (): void => {
     const readJSON = localStorage.getItem('TASK_LIST_LOCAL');
-    console.log(readJSON);
+    const list = {};
+    console.log('Read: ' + readJSON);
   }
 
   const clearLocal = (): void => {
-    setTaskID("");
     localStorage.clear();
     setTaskList([]);
     console.log(localStorage.getItem('TASK_ITEM_LIST'));
   }
 
-  let temp = {
-    taskID: taskID.toString(),
-    taskName: 'test-item-desc',
-    isCompleted: false,
-    endDate: new Date()
-  }
-
-
-
   return (
     <div className='App'>
-      <button onClick={addItem}>X</button>
-      <div>
-        <div>
-          {taskList.map((task: ITask) => {
-            return `${task.taskID}, ${task.taskName}, ${task.isCompleted}, ${task.endDate}`
-          })}
-        </div>
+      <div className='header'>
+        <div className='header-l'>
           <button onClick={() => saveToLocal(taskList)}>Save</button>
-          <button onClick={readFromLocal}>Read</button>
-      </div>
-      <div>
-        <button onClick={clearLocal}>Clear</button>
+          <button onClick={readFromLocal}>Load</button>
+        </div>
+        <div className='header-r'>
+          <button onClick={clearLocal}>Clear</button>
+        </div>
+
       </div>
       <TaskManager taskList={taskList} setTaskList={setTaskList} />
       <TaskList taskList={taskList} setTaskList={setTaskList} />
