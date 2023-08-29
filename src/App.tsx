@@ -6,32 +6,31 @@ import './App.css'
 
 // TODO:
 // - Prevent adding a task with a blank name
-// - Scrollable if tasks overflow screen
+// - Documentation
 
 function App() {
   let [taskList, setTaskList] = useState<ITask[]>([]);
 
   const saveToLocal = (tasks: ITask[]): void => {
     if(tasks.length != 0) {
-      const saveJSON = JSON.stringify(taskList);
-      localStorage.setItem('TASK_LIST_LOCAL', saveJSON);
+      localStorage.setItem('TASK_ITEM_LIST', JSON.stringify(taskList));
     }
   }
 
   const readFromLocal = (): void => {
-    const readJSON = localStorage.getItem('TASK_LIST_LOCAL');
-    const list = {};
-    console.log('Read: ' + readJSON);
+    const readJSON = JSON.parse(localStorage.getItem('TASK_ITEM_LIST') || '{}');
+    setTaskList(readJSON);
   }
 
   const clearLocal = (): void => {
     localStorage.clear();
     setTaskList([]);
-    console.log(localStorage.getItem('TASK_ITEM_LIST'));
   }
 
   return (
     <div className='App'>
+      <div className='header-bg'></div>
+      <div className='list-bg'></div>
       <div className='header'>
         <div className='header-l'>
           <button onClick={() => saveToLocal(taskList)}>Save</button>
@@ -40,7 +39,9 @@ function App() {
         <div className='header-r'>
           <button onClick={clearLocal}>Clear</button>
         </div>
-
+      </div>
+      <div className='title'>
+        <h1>To-Do List</h1>
       </div>
       <TaskManager taskList={taskList} setTaskList={setTaskList} />
       <TaskList taskList={taskList} setTaskList={setTaskList} />

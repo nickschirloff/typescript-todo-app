@@ -13,7 +13,10 @@ export const TaskItem: FC<TaskItemProps> = ({task, removeTask}) => {
 
     const getDaysLeft = (date: Date):string => {
         const currDate = new Date();
-        let difference = Math.ceil((date.getTime() - currDate.getTime()) / (1000 * 3600 * 24));
+        // The 'date' parameter does not convert to a Date class properly when loading saved tasks
+        // Therefore, we have to do some conversions when getting the days left for a task
+        const tempDate = new Date(date);
+        let difference = Math.ceil((tempDate.getTime() - currDate.getTime()) / (1000 * 3600 * 24));
         if (difference < 0) {
             return `Past due by ${Math.abs(difference)} day(s)!`;
         } else {

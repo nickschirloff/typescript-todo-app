@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import { ITask } from '../interfaces/ITask';
 import { TaskItem } from './TaskItem';
 import '../styles/TaskList.scss';
@@ -19,7 +19,7 @@ export const TaskList: FC<TLProps> = ({ taskList, setTaskList }) => {
   return(
     <div className='task-list'>
       {taskList.map(((task: ITask, key:number) => {
-        return <TaskItem task={task} removeTask={removeTask} />;
+        return <TaskItem task={task} key={key} removeTask={removeTask} />;
       }))
       }
     </div>

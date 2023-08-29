@@ -1,6 +1,8 @@
-import { ChangeEvent, Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from 'react';
 import { genTaskID, isIDUnique } from '../models/TILib';
 import { ITask } from '../interfaces/ITask';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 import '../styles/TaskManager.scss';
 
 interface TMProps {
@@ -21,6 +23,9 @@ export const TaskManager: FC<TMProps> = ({taskList, setTaskList}) => {
     }
 
     const addTask = (): void => {
+        if(taskName.trim().length === 0) {
+            
+        }
         // Generate unique id for task
         let id = genTaskID();
         while(!isIDUnique(id,taskList)) {
@@ -39,7 +44,7 @@ export const TaskManager: FC<TMProps> = ({taskList, setTaskList}) => {
     return(
         <div className='task-manager'>
             <input placeholder='Task Name' type='text' name='task' value={taskName} onChange={handleChange} />
-            <input placeholder='Deadline (in days)' type='number'  name='deadline' onChange={handleChange} value={deadline} />
+            <input placeholder='Deadline (in days)' type='number'  name='deadline' min={0} onChange={handleChange} value={deadline} />
             <button onClick={addTask}>Add Task</button>
         </div>
     );

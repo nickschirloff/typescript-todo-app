@@ -1,5 +1,5 @@
 .task-item {
-    width: 100%;
+    width: 99%;
     height: 10vh;
     display: flex;
     align-items: center;
@@ -8,6 +8,8 @@
     border-radius: 5px;
     text-align: center;
     white-space: nowrap;
+    flex-shrink: 0;
+    background-color: #373E40;
 }
 
 .task-item-wrapper {
@@ -24,6 +26,7 @@
         height: 100%;
         font-size: 18px;
         border-right: 1px solid gray;
+        color: white;
     }
     input {
         flex: 15%;
@@ -56,6 +59,7 @@
         border-right: 1px solid gray;
         font-style: italic;
         text-decoration: line-through;
+        color: white;
     }
     input {
         flex: 15%;
