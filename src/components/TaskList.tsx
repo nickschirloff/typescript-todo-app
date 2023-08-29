@@ -4,10 +4,15 @@ import { TaskItem } from './TaskItem';
 import '../styles/TaskList.scss';
 
 type TLProps ={
+  /* The list of tasks to render */
   taskList: ITask[],
+  /* Function to re-render when tasks are removed */
   setTaskList: Dispatch<SetStateAction<ITask[]>>
 }
 
+/*
+*   The component that manages the display of all current tasks.
+*/
 export const TaskList: FC<TLProps> = ({ taskList, setTaskList }) => {
 
   const removeTask = (removedTaskID: string):void => {

@@ -3,10 +3,15 @@ import { ITask } from '../interfaces/ITask';
 import '../styles/TaskItem.scss';
 
 type TaskItemProps = {
+    /* The task to extract data from to build the component */
     task: ITask,
+    /* Function to execute to remove the task from the list when it is completed */
     removeTask(removedTaskID: string): void
 }
 
+/*
+*   The component that displays each task's data, such as its name, deadline, and if its completed
+*/
 export const TaskItem: FC<TaskItemProps> = ({task, removeTask}) => {
 
     const [isCompleted, setIsCompleted] = useState<boolean>(task.isCompleted);
@@ -30,7 +35,7 @@ export const TaskItem: FC<TaskItemProps> = ({task, removeTask}) => {
             <span className='task-span'>{task.taskName}</span>
             <span className='date-span'>{getDaysLeft(task.endDate)}</span>
             <input type='checkbox' onChange={() => setIsCompleted(!isCompleted)} />
-            <button onClick={() => removeTask(task.taskID)}>X</button>
+            <div className='clear-task' onClick={() => removeTask(task.taskID)}>X</div>
           </div>
         </div>
     )

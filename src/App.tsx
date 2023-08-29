@@ -4,23 +4,12 @@ import { TaskManager } from './components/TaskManager';
 import { ITask } from './interfaces/ITask';
 import './App.css'
 
-// TODO:
-// - Prevent adding a task with a blank name
-// - Documentation
-
 function App() {
-  let [taskList, setTaskList] = useState<ITask[]>([]);
-
-  const saveToLocal = (tasks: ITask[]): void => {
-    if(tasks.length != 0) {
-      localStorage.setItem('TASK_ITEM_LIST', JSON.stringify(taskList));
-    }
-  }
-
-  const readFromLocal = (): void => {
-    const readJSON = JSON.parse(localStorage.getItem('TASK_ITEM_LIST') || '{}');
-    setTaskList(readJSON);
-  }
+  /*   
+  *   The main hook that keeps track of the list of tasks, and the addition and removal of tasks
+  *   Initially reads tasks saved in local storage, or generates an empty array if none are found
+  */
+  let [taskList, setTaskList] = useState<ITask[]>(JSON.parse(localStorage.getItem('TASK_ITEM_LIST') || '[]'));
 
   const clearLocal = (): void => {
     localStorage.clear();
@@ -32,12 +21,11 @@ function App() {
       <div className='header-bg'></div>
       <div className='list-bg'></div>
       <div className='header'>
-        <div className='header-l'>
-          <button onClick={() => saveToLocal(taskList)}>Save</button>
-          <button onClick={readFromLocal}>Load</button>
+        <div className='h-left' onClick={() => window.open('https://github.com/nickschirloff/typescript-todo-app')}>
+          nickschirloff
         </div>
-        <div className='header-r'>
-          <button onClick={clearLocal}>Clear</button>
+        <div className='h-right' onClick={clearLocal}>
+          Clear All Tasks
         </div>
       </div>
       <div className='title'>
